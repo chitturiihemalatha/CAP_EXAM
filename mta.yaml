@@ -1,0 +1,24 @@
+_schema-version: "3.2"
+ID: Scenario1
+version: 0.0.1
+modules:
+  - name: Scenario1-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: Scenario1-db
+
+  - name: Scenario1-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: Scenario1-db
+
+resources:
+  - name: Scenario1-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
